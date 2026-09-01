@@ -3,240 +3,247 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI & Tech Quiz Challenge</title>
+  <title>Class 1 Fun Quiz: Math, English & Science</title>
   <style>
     :root {
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
-      --accent: #6366f1;
-      --accent-hover: #4f46e5;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --correct: #22c55e;
-      --incorrect: #ef4444;
-      --easy: #10b981;
-      --medium: #f59e0b;
-      --hard: #ef4444;
-      --border: #334155;
+      --bg: #fdf6e2;
+      --card: #ffffff;
+      --primary: #ff6b6b;
+      --primary-hover: #fa5252;
+      --math-color: #4dabf7;
+      --eng-color: #ffd43b;
+      --sci-color: #69db7c;
+      --text: #2d3748;
+      --muted: #718096;
+      --correct: #40c057;
+      --wrong: #fa5252;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
     }
 
     body {
-      background-color: var(--bg-color);
+      background-color: var(--bg);
       color: var(--text);
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      padding: 20px;
+      padding: 16px;
     }
 
     .quiz-card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+      background: var(--card);
+      border-radius: 24px;
+      padding: 28px;
+      max-width: 580px;
       width: 100%;
-      max-width: 600px;
-      padding: 30px;
-      position: relative;
-      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border: 4px solid #f1e3c8;
+      text-align: center;
     }
 
     .hidden {
       display: none !important;
     }
 
-    h1, h2, h3 {
-      text-align: center;
-      margin-bottom: 12px;
+    h1 {
+      font-size: 1.8rem;
+      color: #e8590c;
+      margin-bottom: 8px;
     }
 
-    p.subtitle {
-      color: var(--text-muted);
-      text-align: center;
-      margin-bottom: 24px;
-      font-size: 0.95rem;
-    }
-
-    /* Difficulty Selection */
-    .difficulty-grid {
-      display: grid;
-      gap: 16px;
-      margin-top: 20px;
-    }
-
-    .btn-diff {
-      padding: 16px 20px;
+    p.tagline {
+      color: var(--muted);
       font-size: 1rem;
-      font-weight: 600;
-      border: 2px solid transparent;
-      border-radius: 12px;
-      cursor: pointer;
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.2s ease;
-      background: #111827;
-    }
-
-    .btn-diff.easy { border-color: var(--easy); }
-    .btn-diff.medium { border-color: var(--medium); }
-    .btn-diff.hard { border-color: var(--hard); }
-
-    .btn-diff:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-    .btn-diff.easy:hover { background-color: rgba(16, 185, 129, 0.15); }
-    .btn-diff.medium:hover { background-color: rgba(245, 158, 11, 0.15); }
-    .btn-diff.hard:hover { background-color: rgba(239, 68, 68, 0.15); }
-
-    /* Header & Progress Bar */
-    .quiz-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .level-badge {
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .badge-easy { background: var(--easy); color: #000; }
-    .badge-medium { background: var(--medium); color: #000; }
-    .badge-hard { background: var(--hard); color: #fff; }
-
-    .progress-bar-container {
-      width: 100%;
-      height: 6px;
-      background: var(--border);
-      border-radius: 3px;
       margin-bottom: 20px;
-      overflow: hidden;
     }
 
-    .progress-bar {
-      height: 100%;
-      background: var(--accent);
-      width: 0%;
-      transition: width 0.3s ease;
+    /* Selection Grids */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #495057;
+      margin: 14px 0 10px;
+    }
+
+    .pill-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .pill-btn {
+      border: 3px solid transparent;
+      padding: 10px 18px;
+      font-size: 1rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+      background: #f1f3f5;
+      color: #495057;
+      transition: all 0.2s ease;
+    }
+
+    .pill-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .pill-btn.selected {
+      border-color: #2b8a3e;
+      background: #d3f9d8;
+      color: #2b8a3e;
+    }
+
+    .pill-btn[data-subject="math"].selected {
+      background: #e7f5ff;
+      border-color: #1971c2;
+      color: #1971c2;
+    }
+
+    .pill-btn[data-subject="english"].selected {
+      background: #fff9db;
+      border-color: #f08c00;
+      color: #e67700;
+    }
+
+    .pill-btn[data-subject="science"].selected {
+      background: #ebfbee;
+      border-color: #2f9e44;
+      color: #2b8a3e;
+    }
+
+    /* Start Button */
+    .btn-start {
+      background: var(--primary);
+      color: #fff;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 16px;
+      padding: 14px 28px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 15px;
+      box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+      transition: 0.2s;
+    }
+
+    .btn-start:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Quiz Header */
+    .quiz-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: var(--muted);
+    }
+
+    .badge {
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      background: #e9ecef;
+      color: #495057;
     }
 
     /* Question & Options */
-    .question-text {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 20px;
+    .question-box {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #212529;
+      margin: 20px 0;
       line-height: 1.4;
+      min-height: 60px;
     }
 
-    .options-grid {
+    .options-list {
       display: grid;
       gap: 12px;
       margin-bottom: 20px;
     }
 
     .option-btn {
-      background: #0f172a;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 14px 18px;
-      border-radius: 10px;
-      font-size: 0.95rem;
-      text-align: left;
+      background: #f8f9fa;
+      border: 3px solid #dee2e6;
+      padding: 14px 20px;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #343a40;
       cursor: pointer;
+      text-align: left;
       transition: all 0.2s ease;
     }
 
     .option-btn:hover:not(:disabled) {
-      background: #334155;
-      border-color: var(--accent);
+      background: #f1f3f5;
+      border-color: #adb5bd;
     }
 
     .option-btn.correct {
-      background-color: rgba(34, 197, 94, 0.2) !important;
+      background: #d3f9d8 !important;
       border-color: var(--correct) !important;
-      color: #86efac;
+      color: #2b8a3e !important;
     }
 
     .option-btn.incorrect {
-      background-color: rgba(239, 68, 68, 0.2) !important;
-      border-color: var(--incorrect) !important;
-      color: #fca5a5;
+      background: #ffe3e3 !important;
+      border-color: var(--wrong) !important;
+      color: #c92a2a !important;
     }
 
-    .option-btn:disabled {
-      cursor: default;
-    }
-
-    /* Feedback & Next Button */
-    .feedback-box {
-      font-size: 0.9rem;
+    /* Feedback Banner */
+    .feedback {
+      font-size: 1.1rem;
+      font-weight: bold;
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 12px;
       margin-bottom: 16px;
-      line-height: 1.4;
-    }
-    .feedback-box.correct {
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid var(--correct);
-      color: #bbf7d0;
-    }
-    .feedback-box.incorrect {
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid var(--incorrect);
-      color: #fecaca;
     }
 
-    .btn-action {
-      background: var(--accent);
-      color: #fff;
+    .feedback.correct {
+      background: #ebfbee;
+      color: #2b8a3e;
+    }
+
+    .feedback.incorrect {
+      background: #fff5f5;
+      color: #c92a2a;
+    }
+
+    .btn-next {
+      background: #4dabf7;
+      color: white;
       border: none;
       padding: 12px 24px;
-      border-radius: 10px;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: bold;
+      border-radius: 14px;
       cursor: pointer;
       width: 100%;
-      transition: background 0.2s;
     }
 
-    .btn-action:hover {
-      background: var(--accent-hover);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      margin-top: 10px;
-    }
-    .btn-secondary:hover {
-      background: #334155;
-      color: var(--text);
+    .btn-next:hover {
+      background: #339af0;
     }
 
     /* Result Screen */
-    .result-score {
+    .score-banner {
       font-size: 3rem;
-      font-weight: 700;
-      color: var(--accent);
-      text-align: center;
+      font-weight: bold;
+      color: #e8590c;
       margin: 15px 0;
     }
   </style>
@@ -244,372 +251,282 @@
 <body>
 
   <div class="quiz-card">
-    <!-- Screen 1: Level Select -->
-    <div id="start-screen">
-      <h1>Tech & AI Quiz</h1>
-      <p class="subtitle">Select your difficulty level to begin. 5 random questions per round!</p>
-      
-      <div class="difficulty-grid">
-        <button class="btn-diff easy" onclick="startQuiz('easy')">
-          <span>🌱 Easy</span>
-          <small>Fundamentals & Basics</small>
-        </button>
-        <button class="btn-diff medium" onclick="startQuiz('medium')">
-          <span>⚡ Medium</span>
-          <small>Concepts & Tools</small>
-        </button>
-        <button class="btn-diff hard" onclick="startQuiz('hard')">
-          <span>🔥 Hard</span>
-          <small>Deep Learning & Architecture</small>
-        </button>
+    
+    <!-- Step 1: Subject & Difficulty Selection -->
+    <div id="setup-screen">
+      <h1>⭐ Class 1 Quiz ⭐</h1>
+      <p class="tagline">Pick your favorite subject and level to play!</p>
+
+      <div class="section-title">1. Choose Subject</div>
+      <div class="pill-group" id="subject-group">
+        <button class="pill-btn selected" data-subject="math" onclick="setSubject('math')">🔢 Math</button>
+        <button class="pill-btn" data-subject="english" onclick="setSubject('english')">📖 English</button>
+        <button class="pill-btn" data-subject="science" onclick="setSubject('science')">🌱 Science</button>
       </div>
+
+      <div class="section-title">2. Choose Difficulty</div>
+      <div class="pill-group" id="difficulty-group">
+        <button class="pill-btn selected" data-level="easy" onclick="setLevel('easy')">🟢 Easy</button>
+        <button class="pill-btn" data-level="medium" onclick="setLevel('medium')">🟡 Medium</button>
+        <button class="pill-btn" data-level="hard" onclick="setLevel('hard')">🔴 Hard</button>
+      </div>
+
+      <button class="btn-start" onclick="startQuiz()">Start Playing 🚀</button>
     </div>
 
-    <!-- Screen 2: Active Quiz -->
+    <!-- Step 2: Active Quiz -->
     <div id="quiz-screen" class="hidden">
-      <div class="quiz-header">
-        <span id="level-indicator" class="level-badge">Easy</span>
-        <span id="question-count">Question 1/5</span>
-        <span id="score-counter">Score: 0</span>
+      <div class="quiz-bar">
+        <span id="subject-badge" class="badge">Math</span>
+        <span id="q-counter">Question 1/5</span>
+        <span id="score-counter">Score: 0 ⭐</span>
       </div>
 
-      <div class="progress-bar-container">
-        <div id="progress-bar" class="progress-bar"></div>
-      </div>
+      <div id="question-text" class="question-box">Loading...</div>
+      <div id="options-box" class="options-list"></div>
 
-      <div id="question-text" class="question-text">Loading question...</div>
-      <div id="options-container" class="options-grid"></div>
-
-      <div id="feedback" class="feedback-box hidden"></div>
-      <button id="next-btn" class="btn-action hidden" onclick="nextQuestion()">Next Question</button>
+      <div id="feedback" class="feedback hidden"></div>
+      <button id="next-btn" class="btn-next hidden" onclick="nextQuestion()">Next Question ➡️</button>
     </div>
 
-    <!-- Screen 3: Result Summary -->
+    <!-- Step 3: Result -->
     <div id="result-screen" class="hidden">
-      <h2>Quiz Complete!</h2>
-      <p id="result-message" class="subtitle">Here is how you performed:</p>
-      <div id="final-score" class="result-score">0/5</div>
-      <p id="result-percentage" style="text-align: center; margin-bottom: 24px; color: var(--text-muted);"></p>
+      <h1>🎉 Great Job! 🎉</h1>
+      <p class="tagline">You finished the quiz!</p>
+      <div id="final-score" class="score-banner">0 / 5</div>
+      <p id="star-message" style="margin-bottom: 24px; font-weight: bold;"></p>
       
-      <button class="btn-action" onclick="restartCurrentLevel()">Play This Level Again</button>
-      <button class="btn-action btn-secondary" onclick="showLevelSelect()">Change Difficulty</button>
+      <button class="btn-start" onclick="startQuiz()">Play Again 🔄</button>
+      <button class="pill-btn" style="margin-top: 12px; width: 100%;" onclick="goHome()">Choose Another Subject 🏠</button>
     </div>
+
   </div>
 
   <script>
-    // Extensive Question Banks for each difficulty level
-    const questionBank = {
-      easy: [
-        {
-          question: "What does 'AI' stand for?",
-          options: ["Artificial Intelligence", "Automated Information", "Applied Internet", "Algorithmic Integration"],
-          answer: 0,
-          explanation: "AI stands for Artificial Intelligence, the simulation of human intelligence in machines."
-        },
-        {
-          question: "Which of the following is commonly used for AI and Data Science?",
-          options: ["Python", "HTML", "CSS", "Photoshop"],
-          answer: 0,
-          explanation: "Python is the most widely adopted programming language for machine learning and AI."
-        },
-        {
-          question: "What does HTML stand for in web development?",
-          options: ["HyperText Markup Language", "High-level Text Management Logic", "Hyper Tool Multi Language", "Home Tool Markup Language"],
-          answer: 0,
-          explanation: "HTML stands for HyperText Markup Language and is used to structure web pages."
-        },
-        {
-          question: "What type of chatbot is OpenAI's ChatGPT?",
-          options: ["Large Language Model", "Relational Database", "Operating System", "Compiler"],
-          answer: 0,
-          explanation: "ChatGPT is built on Generative Pre-trained Transformer models (Large Language Models)."
-        },
-        {
-          question: "Which device is primarily used to process graphics and AI tensor operations?",
-          options: ["GPU", "HDD", "Sound Card", "Power Supply Unit"],
-          answer: 0,
-          explanation: "Graphics Processing Units (GPUs) specialize in parallel computation, making them ideal for AI workloads."
-        },
-        {
-          question: "What is Git used for?",
-          options: ["Version Control", "Designing Logos", "Hosting Databases", "Audio Editing"],
-          answer: 0,
-          explanation: "Git is a distributed version control system designed to track changes in source code."
-        },
-        {
-          question: "Which company created the search engine Google?",
-          options: ["Alphabet / Google", "Microsoft", "Meta", "Amazon"],
-          answer: 0,
-          explanation: "Google was founded by Larry Page and Sergey Brin and is now a subsidiary of Alphabet Inc."
-        },
-        {
-          question: "What is an algorithm?",
-          options: ["A step-by-step set of instructions", "A type of computer screen", "A computer virus", "A social media platform"],
-          answer: 0,
-          explanation: "An algorithm is a finite sequence of well-defined, computer-implementable instructions."
-        }
-      ],
+    // Class 1 Question Bank: Categorized by Subject & Difficulty
+    const questionsDatabase = {
+      math: {
+        easy: [
+          { q: "What is 2 + 3?", options: ["5", "4", "6", "7"], a: "5" },
+          { q: "What number comes after 9?", options: ["10", "8", "11", "7"], a: "10" },
+          { q: "Which shape has 3 sides?", options: ["Triangle", "Square", "Circle", "Rectangle"], a: "Triangle" },
+          { q: "What is 5 - 1?", options: ["4", "3", "6", "2"], a: "4" },
+          { q: "Which number is smaller: 2 or 8?", options: ["2", "8"], a: "2" },
+          { q: "How many fingers do you have on one hand?", options: ["5", "4", "10", "6"], a: "5" },
+          { q: "What is 1 + 1?", options: ["2", "3", "0", "1"], a: "2" }
+        ],
+        medium: [
+          { q: "What is 7 + 6?", options: ["13", "12", "14", "11"], a: "13" },
+          { q: "What is 10 - 4?", options: ["6", "5", "7", "4"], a: "6" },
+          { q: "Which number is the BIGGEST?", options: ["19", "12", "9", "15"], a: "19" },
+          { q: "Count in 2s: 2, 4, 6, __?", options: ["8", "7", "9", "10"], a: "8" },
+          { q: "What number comes just before 20?", options: ["19", "18", "21", "17"], a: "19" },
+          { q: "What is 8 + 0?", options: ["8", "0", "9", "80"], a: "8" },
+          { q: "How many corners does a square have?", options: ["4", "3", "5", "0"], a: "4" }
+        ],
+        hard: [
+          { q: "You have 5 apples. You eat 2, then pick 4 more. How many now?", options: ["7", "6", "8", "5"], a: "7" },
+          { q: "What is 15 - 7?", options: ["8", "9", "7", "6"], a: "8" },
+          { q: "Which is an EVEN number?", options: ["8", "7", "5", "3"], a: "8" },
+          { q: "What is 10 + 10?", options: ["20", "100", "15", "18"], a: "20" },
+          { q: "Find the missing number: 5, 10, 15, __?", options: ["20", "25", "16", "18"], a: "20" },
+          { q: "A clock has two hands. The short hand tells the...?", options: ["Hour", "Minute", "Second", "Day"], a: "Hour" }
+        ]
+      },
 
-      medium: [
-        {
-          question: "In Machine Learning, what type of learning uses labeled input and output data?",
-          options: ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "Self-Taught Learning"],
-          answer: 0,
-          explanation: "Supervised learning trains models on input-output pairs to learn a mapping function."
-        },
-        {
-          question: "What does the 'T' stand for in GPT?",
-          options: ["Transformer", "Translator", "Tokenizer", "Trainer"],
-          answer: 0,
-          explanation: "GPT stands for Generative Pre-trained Transformer."
-        },
-        {
-          question: "What is 'overfitting' in machine learning models?",
-          options: [
-            "Model performs well on training data but poorly on unseen test data",
-            "Model is too simple to capture patterns",
-            "Model takes too long to train",
-            "Dataset is too small to load into memory"
-          ],
-          answer: 0,
-          explanation: "Overfitting occurs when a model memorizes noise and specific patterns in training data instead of generalizing."
-        },
-        {
-          question: "Which activation function outputs values strictly between 0 and 1?",
-          options: ["Sigmoid", "ReLU", "Leaky ReLU", "Linear"],
-          answer: 0,
-          explanation: "The Sigmoid function maps any real-valued number into a range between 0 and 1."
-        },
-        {
-          question: "What is the primary role of an 'AI Agent'?",
-          options: [
-            "Perceiving its environment and taking actions autonomously to achieve goals",
-            "Storing SQL records",
-            "Encrypting passwords",
-            "Transcribing audio files"
-          ],
-          answer: 0,
-          explanation: "An AI agent is an autonomous entity which observes and acts upon an environment to achieve specified objectives."
-        },
-        {
-          question: "Which of these is an open-source deep learning framework developed by Meta?",
-          options: ["PyTorch", "TensorFlow", "Keras", "Scikit-Learn"],
-          answer: 0,
-          explanation: "PyTorch was developed by Meta (Facebook AI Research) and is widely used for research and production."
-        },
-        {
-          question: "What technique prevents neural networks from overfitting by randomly disabling neurons during training?",
-          options: ["Dropout", "Batch Normalization", "Gradient Descent", "Max Pooling"],
-          answer: 0,
-          explanation: "Dropout randomly sets input units to 0 with a frequency of rate at each step during training."
-        }
-      ],
+      english: {
+        easy: [
+          { q: "Which letter comes after 'C'?", options: ["D", "E", "B", "A"], a: "D" },
+          { q: "What is the first letter of 'APPLE'?", options: ["A", "P", "L", "E"], a: "A" },
+          { q: "Which of these is a VOWEL?", options: ["E", "B", "T", "M"], a: "E" },
+          { q: "Which word rhymes with 'CAT'?", options: ["BAT", "DOG", "SUN", "PIG"], a: "BAT" },
+          { q: "What is the plural of 'Cat' (more than one)?", options: ["Cats", "Cates", "Caties", "Cat"], a: "Cats" },
+          { q: "Which letter is a CAPITAL letter?", options: ["M", "m", "b", "d"], a: "M" }
+        ],
+        medium: [
+          { q: "What is the opposite of 'HOT'?", options: ["Cold", "Warm", "Dry", "Soft"], a: "Cold" },
+          { q: "Choose the correct word: 'The sky is ___'", options: ["blue", "blew", "blow", "blues"], a: "blue" },
+          { q: "Which word is a naming word (Noun)?", options: ["Dog", "Run", "Quickly", "Yellow"], a: "Dog" },
+          { q: "Fill in the vowel: B _ D (place to sleep)", options: ["E", "A", "O", "U"], a: "E" },
+          { q: "What is the opposite of 'BIG'?", options: ["Small", "Huge", "Tall", "Heavy"], a: "Small" },
+          { q: "Which of these is an action word (Verb)?", options: ["Jump", "Chair", "Table", "Tree"], a: "Jump" }
+        ],
+        hard: [
+          { q: "Choose the correct sentence:", options: ["She has a red ball.", "She have a red ball.", "She having a ball.", "Her has red ball."], a: "She has a red ball." },
+          { q: "What is the plural of 'BOX'?", options: ["Boxes", "Boxs", "Boxen", "Boxies"], a: "Boxes" },
+          { q: "Which word starts with a blend sound 'BL'?", options: ["Blue", "Ball", "Bird", "Boat"], a: "Blue" },
+          { q: "Which word describes something (Adjective)?", options: ["Sweet", "Sugar", "Eat", "Plate"], a: "Sweet" },
+          { q: "What punctuation mark goes at the end of 'Where are you going'?", options: ["?", "!", ".", ","], a: "?" }
+        ]
+      },
 
-      hard: [
-        {
-          question: "What mechanism is the core innovation introduced in the landmark paper 'Attention Is All You Need' (2017)?",
-          options: ["Self-Attention Mechanism", "Backpropagation", "Residual Connections", "Convolutional Kernels"],
-          answer: 0,
-          explanation: "The Transformer architecture relies on the Self-Attention mechanism to capture global dependencies without recurrence."
-        },
-        {
-          question: "What does RAG stand for in modern generative AI architectures?",
-          options: [
-            "Retrieval-Augmented Generation",
-            "Recurrent Autoencoder Gradient",
-            "Randomized Attention Guidance",
-            "Real-time Agentic Graph"
-          ],
-          answer: 0,
-          explanation: "RAG combines external information retrieval with large language models to ground output in factual source data."
-        },
-        {
-          question: "In Reinforcement Learning from Human Feedback (RLHF), which algorithm is commonly used to optimize the policy?",
-          options: ["PPO (Proximal Policy Optimization)", "K-Means", "Dijkstra's Algorithm", "Random Forest"],
-          answer: 0,
-          explanation: "PPO is widely utilized in RLHF to safely update policy parameters without catastrophic divergence."
-        },
-        {
-          question: "What is the primary issue addressed by Residual Connections (ResNets)?",
-          options: [
-            "Vanishing/Exploding Gradient in deep networks",
-            "Data storage limits",
-            "Token context length limitations",
-            "Slow disk I/O"
-          ],
-          answer: 0,
-          explanation: "Skip/residual connections allow gradients to flow directly through the network, mitigating vanishing gradients."
-        },
-        {
-          question: "What mathematical property characterizes the Softmax function used in classification?",
-          options: [
-            "It transforms logits into a valid probability distribution summing to 1",
-            "It produces strictly orthogonal matrices",
-            "It calculates the determinant of weight matrices",
-            "It clips negative gradient values to zero"
-          ],
-          answer: 0,
-          explanation: "Softmax normalizes real input vectors into probability distributions where each entry is in (0, 1) and all sum to 1."
-        },
-        {
-          question: "In LoRA (Low-Rank Adaptation) fine-tuning, how are weight updates parameterized?",
-          options: [
-            "By decomposing weight matrices into low-rank matrices (A * B)",
-            "By pruning 90% of the weights randomly",
-            "By converting floating points to 1-bit integers",
-            "By training only the input embedding layer"
-          ],
-          answer: 0,
-          explanation: "LoRA freezes pre-trained model weights and injects trainable rank decomposition matrices into each layer."
-        }
-      ]
+      science: {
+        easy: [
+          { q: "Which part of your body do you use to SEE?", options: ["Eyes", "Ears", "Nose", "Hands"], a: "Eyes" },
+          { q: "What does a plant need to grow?", options: ["Water & Sunlight", "Juice & Milk", "Candy", "Ice cream"], a: "Water & Sunlight" },
+          { q: "Which animal gives us milk?", options: ["Cow", "Lion", "Tiger", "Eagle"], a: "Cow" },
+          { q: "The Sun gives us light and...?", options: ["Heat", "Ice", "Water", "Wind"], a: "Heat" },
+          { q: "Where do fish live?", options: ["In water", "On trees", "In air", "In underground caves"], a: "In water" },
+          { q: "How many legs does a dog have?", options: ["4", "2", "6", "8"], a: "4" }
+        ],
+        medium: [
+          { q: "Which sense organ helps us TASTE food?", options: ["Tongue", "Nose", "Skin", "Eyes"], a: "Tongue" },
+          { q: "Which animal is known as the 'King of the Jungle'?", options: ["Lion", "Elephant", "Monkey", "Fox"], a: "Lion" },
+          { q: "Which part of a plant is under the ground?", options: ["Roots", "Leaves", "Flowers", "Stem"], a: "Roots" },
+          { q: "Which is a domestic (pet) animal?", options: ["Cat", "Bear", "Zebra", "Wolf"], a: "Cat" },
+          { q: "Which bird cannot fly high and swims well?", options: ["Penguin", "Parrot", "Crow", "Sparrow"], a: "Penguin" },
+          { q: "What color are most plant leaves?", options: ["Green", "Blue", "Pink", "Black"], a: "Green" }
+        ],
+        hard: [
+          { q: "Which animal lays eggs?", options: ["Hen", "Cow", "Dog", "Cat"], a: "Hen" },
+          { q: "What makes day and night on Earth?", options: ["Earth spinning (rotating)", "The Moon sleeping", "Clouds moving", "Wind blowing"], a: "Earth spinning (rotating)" },
+          { q: "Which of these is a living thing?", options: ["Tree", "Toy car", "Rock", "Pencil"], a: "Tree" },
+          { q: "Frogs can live both on land and in...?", options: ["Water", "Space", "Trees only", "Fire"], a: "Water" },
+          { q: "Which meal do we eat in the morning?", options: ["Breakfast", "Lunch", "Dinner", "Snack"], a: "Breakfast" }
+        ]
+      }
     };
 
     // State Variables
-    let currentLevel = 'easy';
-    let currentQuestions = [];
-    let currentQuestionIndex = 0;
-    let score = 0;
-    const QUESTIONS_PER_ROUND = 5;
+    let selectedSubject = 'math';
+    let selectedLevel = 'easy';
+    let activeQuestions = [];
+    let currentIndex = 0;
+    let currentScore = 0;
+    const TOTAL_QUESTIONS_PER_ROUND = 5;
 
-    // Utility: Fisher-Yates Array Shuffle
-    function shuffleArray(array) {
-      const arr = [...array];
-      for (let i = arr.length - 1; i > 0; i--) {
+    // Helper: Shuffle Array (Fisher-Yates)
+    function shuffle(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+        [copy[i], copy[j]] = [copy[j], copy[i]];
       }
-      return arr;
+      return copy;
     }
 
-    // Start Quiz with selected difficulty
-    function startQuiz(level) {
-      currentLevel = level;
-      score = 0;
-      currentQuestionIndex = 0;
-
-      // Pick random non-repeating questions for this round
-      const pool = shuffleArray(questionBank[level]);
-      const selected = pool.slice(0, Math.min(QUESTIONS_PER_ROUND, pool.length));
-
-      // Randomize options for each question while tracking the correct answer text
-      currentQuestions = selected.map(q => {
-        const originalCorrectText = q.options[q.answer];
-        const shuffledOptions = shuffleArray(q.options);
-        return {
-          question: q.question,
-          options: shuffledOptions,
-          answer: shuffledOptions.indexOf(originalCorrectText),
-          explanation: q.explanation
-        };
+    function setSubject(sub) {
+      selectedSubject = sub;
+      document.querySelectorAll('#subject-group .pill-btn').forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.subject === sub);
       });
+    }
 
-      // Update UI elements
-      document.getElementById('start-screen').classList.add('hidden');
+    function setLevel(lvl) {
+      selectedLevel = lvl;
+      document.querySelectorAll('#difficulty-group .pill-btn').forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.level === lvl);
+      });
+    }
+
+    function startQuiz() {
+      currentScore = 0;
+      currentIndex = 0;
+
+      // Select and shuffle questions
+      const pool = questionsDatabase[selectedSubject][selectedLevel];
+      const randomSubset = shuffle(pool).slice(0, Math.min(TOTAL_QUESTIONS_PER_ROUND, pool.length));
+
+      // Shuffle options for each question
+      activeQuestions = randomSubset.map(item => ({
+        question: item.q,
+        options: shuffle(item.options),
+        correctAnswer: item.a
+      }));
+
+      // Switch screens
+      document.getElementById('setup-screen').classList.add('hidden');
       document.getElementById('result-screen').classList.add('hidden');
       document.getElementById('quiz-screen').classList.remove('hidden');
 
-      const levelBadge = document.getElementById('level-indicator');
-      levelBadge.textContent = level;
-      levelBadge.className = `level-badge badge-${level}`;
+      const subjectBadge = document.getElementById('subject-badge');
+      subjectBadge.textContent = `${selectedSubject.toUpperCase()} (${selectedLevel.toUpperCase()})`;
 
-      renderQuestion();
+      showQuestion();
     }
 
-    // Render current question
-    function renderQuestion() {
-      const q = currentQuestions[currentQuestionIndex];
+    function showQuestion() {
+      const q = activeQuestions[currentIndex];
       
-      document.getElementById('question-count').textContent = `Question ${currentQuestionIndex + 1}/${currentQuestions.length}`;
-      document.getElementById('score-counter').textContent = `Score: ${score}`;
+      document.getElementById('q-counter').textContent = `Question ${currentIndex + 1}/${activeQuestions.length}`;
+      document.getElementById('score-counter').textContent = `Score: ${currentScore} ⭐`;
       document.getElementById('question-text').textContent = q.question;
 
-      // Update progress bar
-      const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
-      document.getElementById('progress-bar').style.width = `${progress}%`;
+      const optionsBox = document.getElementById('options-box');
+      optionsBox.innerHTML = '';
 
-      // Render option buttons
-      const container = document.getElementById('options-container');
-      container.innerHTML = '';
-
-      q.options.forEach((optText, idx) => {
+      q.options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        btn.textContent = optText;
-        btn.onclick = () => selectOption(idx);
-        container.appendChild(btn);
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt);
+        optionsBox.appendChild(btn);
       });
 
-      // Hide feedback and next button
-      document.getElementById('feedback').className = 'feedback-box hidden';
+      document.getElementById('feedback').className = 'feedback hidden';
       document.getElementById('next-btn').classList.add('hidden');
     }
 
-    // Handle user selection
-    function selectOption(selectedIdx) {
-      const q = currentQuestions[currentQuestionIndex];
+    function checkAnswer(chosen) {
+      const q = activeQuestions[currentIndex];
       const buttons = document.querySelectorAll('.option-btn');
       const feedback = document.getElementById('feedback');
-      const isCorrect = selectedIdx === q.answer;
+      const isCorrect = chosen === q.correctAnswer;
 
-      // Disable all options
-      buttons.forEach((btn, idx) => {
+      buttons.forEach(btn => {
         btn.disabled = true;
-        if (idx === q.answer) {
+        if (btn.textContent === q.correctAnswer) {
           btn.classList.add('correct');
-        } else if (idx === selectedIdx) {
+        } else if (btn.textContent === chosen) {
           btn.classList.add('incorrect');
         }
       });
 
       if (isCorrect) {
-        score++;
-        feedback.textContent = `Correct! ${q.explanation}`;
-        feedback.className = 'feedback-box correct';
+        currentScore++;
+        feedback.textContent = "🌟 Wonderful! You got it right!";
+        feedback.className = "feedback correct";
       } else {
-        feedback.textContent = `Incorrect. ${q.explanation}`;
-        feedback.className = 'feedback-box incorrect';
+        feedback.textContent = `Oops! The correct answer is "${q.correctAnswer}".`;
+        feedback.className = "feedback incorrect";
       }
 
       feedback.classList.remove('hidden');
-      document.getElementById('score-counter').textContent = `Score: ${score}`;
-      
+      document.getElementById('score-counter').textContent = `Score: ${currentScore} ⭐`;
+
       const nextBtn = document.getElementById('next-btn');
-      nextBtn.textContent = (currentQuestionIndex + 1 < currentQuestions.length) ? 'Next Question' : 'View Results';
+      nextBtn.textContent = (currentIndex + 1 < activeQuestions.length) ? "Next Question ➡️" : "Show My Score 🏆";
       nextBtn.classList.remove('hidden');
     }
 
-    // Proceed to next question or complete quiz
     function nextQuestion() {
-      currentQuestionIndex++;
-      if (currentQuestionIndex < currentQuestions.length) {
-        renderQuestion();
+      currentIndex++;
+      if (currentIndex < activeQuestions.length) {
+        showQuestion();
       } else {
-        showResults();
+        finishQuiz();
       }
     }
 
-    // Display final score screen
-    function showResults() {
-      document.getElementById('progress-bar').style.width = '100%';
+    function finishQuiz() {
       document.getElementById('quiz-screen').classList.add('hidden');
       document.getElementById('result-screen').classList.remove('hidden');
 
-      const total = currentQuestions.length;
-      const percentage = Math.round((score / total) * 100);
-
-      document.getElementById('final-score').textContent = `${score} / ${total}`;
-      document.getElementById('result-percentage').textContent = `Accuracy: ${percentage}% (${currentLevel.toUpperCase()} level)`;
+      document.getElementById('final-score').textContent = `${currentScore} / ${activeQuestions.length}`;
+      
+      const starMsg = document.getElementById('star-message');
+      if (currentScore === activeQuestions.length) {
+        starMsg.textContent = "⭐⭐⭐ Super Star! Perfect Score!";
+      } else if (currentScore >= 3) {
+        starMsg.textContent = "⭐⭐ Great Effort! Almost there!";
+      } else {
+        starMsg.textContent = "⭐ Nice Try! Practice makes perfect!";
+      }
     }
 
-    function restartCurrentLevel() {
-      startQuiz(currentLevel);
-    }
-
-    function showLevelSelect() {
+    function goHome() {
       document.getElementById('result-screen').classList.add('hidden');
-      document.getElementById('quiz-screen').classList.add('hidden');
-      document.getElementById('start-screen').classList.remove('hidden');
+      document.getElementById('setup-screen').classList.remove('hidden');
     }
   </script>
 </body>
