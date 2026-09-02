@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Class 1 Fun Quiz: Math, English & Science</title>
+  <title>Kids Fun Learning Quiz: Class 1, 2 & 3</title>
   <style>
     :root {
       --bg: #fdf6e2;
       --card: #ffffff;
       --primary: #ff6b6b;
       --primary-hover: #fa5252;
-      --math-color: #4dabf7;
-      --eng-color: #ffd43b;
-      --sci-color: #69db7c;
+      --math-color: #1971c2;
+      --math-bg: #e7f5ff;
+      --eng-color: #e67700;
+      --eng-bg: #fff9db;
+      --sci-color: #2b8a3e;
+      --sci-bg: #ebfbee;
       --text: #2d3748;
       --muted: #718096;
       --correct: #40c057;
       --wrong: #fa5252;
+      --border: #f1e3c8;
     }
 
     * {
@@ -39,50 +43,79 @@
     .quiz-card {
       background: var(--card);
       border-radius: 24px;
-      padding: 28px;
-      max-width: 580px;
+      padding: 24px;
+      max-width: 600px;
       width: 100%;
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-      border: 4px solid #f1e3c8;
+      border: 4px solid var(--border);
       text-align: center;
+      position: relative;
     }
 
     .hidden {
       display: none !important;
     }
 
+    /* Top Bar with Home Button */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .btn-home {
+      background: #f1f3f5;
+      border: 2px solid #ced4da;
+      border-radius: 12px;
+      padding: 6px 14px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: #495057;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-home:hover {
+      background: #e9ecef;
+      transform: scale(1.05);
+    }
+
     h1 {
       font-size: 1.8rem;
       color: #e8590c;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     p.tagline {
       color: var(--muted);
-      font-size: 1rem;
-      margin-bottom: 20px;
+      font-size: 0.95rem;
+      margin-bottom: 18px;
     }
 
-    /* Selection Grids */
+    /* Setup Filters */
     .section-title {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: bold;
       color: #495057;
-      margin: 14px 0 10px;
+      margin: 14px 0 8px;
     }
 
     .pill-group {
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .pill-btn {
       border: 3px solid transparent;
-      padding: 10px 18px;
-      font-size: 1rem;
+      padding: 9px 16px;
+      font-size: 0.95rem;
       border-radius: 999px;
       cursor: pointer;
       font-weight: bold;
@@ -92,34 +125,41 @@
     }
 
     .pill-btn:hover {
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
+    /* Pill Selection States */
     .pill-btn.selected {
       border-color: #2b8a3e;
       background: #d3f9d8;
       color: #2b8a3e;
     }
 
+    .pill-btn[data-class].selected {
+      border-color: #7950f2;
+      background: #f3f0ff;
+      color: #7950f2;
+    }
+
     .pill-btn[data-subject="math"].selected {
-      background: #e7f5ff;
-      border-color: #1971c2;
-      color: #1971c2;
+      background: var(--math-bg);
+      border-color: var(--math-color);
+      color: var(--math-color);
     }
 
     .pill-btn[data-subject="english"].selected {
-      background: #fff9db;
-      border-color: #f08c00;
-      color: #e67700;
+      background: var(--eng-bg);
+      border-color: var(--eng-color);
+      color: var(--eng-color);
     }
 
     .pill-btn[data-subject="science"].selected {
-      background: #ebfbee;
-      border-color: #2f9e44;
-      color: #2b8a3e;
+      background: var(--sci-bg);
+      border-color: var(--sci-color);
+      color: var(--sci-color);
     }
 
-    /* Start Button */
+    /* Action Buttons */
     .btn-start {
       background: var(--primary);
       color: #fff;
@@ -129,7 +169,7 @@
       padding: 14px 28px;
       font-weight: bold;
       cursor: pointer;
-      margin-top: 15px;
+      margin-top: 14px;
       box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
       transition: 0.2s;
     }
@@ -144,42 +184,44 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
-      font-size: 0.95rem;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
       font-weight: bold;
       color: var(--muted);
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .badge {
-      padding: 4px 12px;
+      padding: 4px 10px;
       border-radius: 999px;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       background: #e9ecef;
       color: #495057;
     }
 
-    /* Question & Options */
+    /* Questions & Options */
     .question-box {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: bold;
       color: #212529;
-      margin: 20px 0;
+      margin: 18px 0;
       line-height: 1.4;
-      min-height: 60px;
+      min-height: 55px;
     }
 
     .options-list {
       display: grid;
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
     .option-btn {
       background: #f8f9fa;
       border: 3px solid #dee2e6;
-      padding: 14px 20px;
-      border-radius: 16px;
-      font-size: 1.1rem;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-size: 1rem;
       font-weight: bold;
       color: #343a40;
       cursor: pointer;
@@ -204,13 +246,13 @@
       color: #c92a2a !important;
     }
 
-    /* Feedback Banner */
+    /* Feedback Box */
     .feedback {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: bold;
-      padding: 12px;
+      padding: 10px;
       border-radius: 12px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .feedback.correct {
@@ -239,7 +281,6 @@
       background: #339af0;
     }
 
-    /* Result Screen */
     .score-banner {
       font-size: 3rem;
       font-weight: bold;
@@ -251,33 +292,42 @@
 <body>
 
   <div class="quiz-card">
-    
-    <!-- Step 1: Subject & Difficulty Selection -->
-    <div id="setup-screen">
-      <h1>⭐ Class 1 Quiz ⭐</h1>
-      <p class="tagline">Pick your favorite subject and level to play!</p>
+    <div class="top-nav">
+      <button class="btn-home" onclick="goHome()">🏠 Home</button>
+      <span id="nav-info" style="font-size: 0.85rem; color: var(--muted);">Fun Learning Quiz</span>
+    </div>
 
-      <div class="section-title">1. Choose Subject</div>
+    <div id="setup-screen">
+      <h1>⭐ Kids School Quiz ⭐</h1>
+      <p class="tagline">Pick your grade, subject, and challenge level!</p>
+
+      <div class="section-title">1. Choose Class</div>
+      <div class="pill-group" id="class-group">
+        <button class="pill-btn selected" data-class="class1" onclick="setClassLevel('class1')">🎒 Class 1</button>
+        <button class="pill-btn" data-class="class2" onclick="setClassLevel('class2')">📘 Class 2</button>
+        <button class="pill-btn" data-class="class3" onclick="setClassLevel('class3')">🎓 Class 3</button>
+      </div>
+
+      <div class="section-title">2. Choose Subject</div>
       <div class="pill-group" id="subject-group">
         <button class="pill-btn selected" data-subject="math" onclick="setSubject('math')">🔢 Math</button>
         <button class="pill-btn" data-subject="english" onclick="setSubject('english')">📖 English</button>
         <button class="pill-btn" data-subject="science" onclick="setSubject('science')">🌱 Science</button>
       </div>
 
-      <div class="section-title">2. Choose Difficulty</div>
+      <div class="section-title">3. Choose Difficulty</div>
       <div class="pill-group" id="difficulty-group">
-        <button class="pill-btn selected" data-level="easy" onclick="setLevel('easy')">🟢 Easy</button>
-        <button class="pill-btn" data-level="medium" onclick="setLevel('medium')">🟡 Medium</button>
-        <button class="pill-btn" data-level="hard" onclick="setLevel('hard')">🔴 Hard</button>
+        <button class="pill-btn selected" data-level="easy" onclick="setDifficulty('easy')">🟢 Easy</button>
+        <button class="pill-btn" data-level="medium" onclick="setDifficulty('medium')">🟡 Medium</button>
+        <button class="pill-btn" data-level="hard" onclick="setDifficulty('hard')">🔴 Hard</button>
       </div>
 
       <button class="btn-start" onclick="startQuiz()">Start Playing 🚀</button>
     </div>
 
-    <!-- Step 2: Active Quiz -->
     <div id="quiz-screen" class="hidden">
       <div class="quiz-bar">
-        <span id="subject-badge" class="badge">Math</span>
+        <span id="badge-info" class="badge">Class 1 • Math • Easy</span>
         <span id="q-counter">Question 1/5</span>
         <span id="score-counter">Score: 0 ⭐</span>
       </div>
@@ -289,113 +339,232 @@
       <button id="next-btn" class="btn-next hidden" onclick="nextQuestion()">Next Question ➡️</button>
     </div>
 
-    <!-- Step 3: Result -->
     <div id="result-screen" class="hidden">
-      <h1>🎉 Great Job! 🎉</h1>
-      <p class="tagline">You finished the quiz!</p>
+      <h1>🎉 Super Work! 🎉</h1>
+      <p class="tagline">Here is your final quiz score:</p>
       <div id="final-score" class="score-banner">0 / 5</div>
-      <p id="star-message" style="margin-bottom: 24px; font-weight: bold;"></p>
+      <p id="star-message" style="margin-bottom: 20px; font-weight: bold;"></p>
       
       <button class="btn-start" onclick="startQuiz()">Play Again 🔄</button>
-      <button class="pill-btn" style="margin-top: 12px; width: 100%;" onclick="goHome()">Choose Another Subject 🏠</button>
+      <button class="pill-btn" style="margin-top: 12px; width: 100%;" onclick="goHome()">Back to Home 🏠</button>
     </div>
-
   </div>
 
   <script>
-    // Class 1 Question Bank: Categorized by Subject & Difficulty
-    const questionsDatabase = {
-      math: {
-        easy: [
-          { q: "What is 2 + 3?", options: ["5", "4", "6", "7"], a: "5" },
-          { q: "What number comes after 9?", options: ["10", "8", "11", "7"], a: "10" },
-          { q: "Which shape has 3 sides?", options: ["Triangle", "Square", "Circle", "Rectangle"], a: "Triangle" },
-          { q: "What is 5 - 1?", options: ["4", "3", "6", "2"], a: "4" },
-          { q: "Which number is smaller: 2 or 8?", options: ["2", "8"], a: "2" },
-          { q: "How many fingers do you have on one hand?", options: ["5", "4", "10", "6"], a: "5" },
-          { q: "What is 1 + 1?", options: ["2", "3", "0", "1"], a: "2" }
-        ],
-        medium: [
-          { q: "What is 7 + 6?", options: ["13", "12", "14", "11"], a: "13" },
-          { q: "What is 10 - 4?", options: ["6", "5", "7", "4"], a: "6" },
-          { q: "Which number is the BIGGEST?", options: ["19", "12", "9", "15"], a: "19" },
-          { q: "Count in 2s: 2, 4, 6, __?", options: ["8", "7", "9", "10"], a: "8" },
-          { q: "What number comes just before 20?", options: ["19", "18", "21", "17"], a: "19" },
-          { q: "What is 8 + 0?", options: ["8", "0", "9", "80"], a: "8" },
-          { q: "How many corners does a square have?", options: ["4", "3", "5", "0"], a: "4" }
-        ],
-        hard: [
-          { q: "You have 5 apples. You eat 2, then pick 4 more. How many now?", options: ["7", "6", "8", "5"], a: "7" },
-          { q: "What is 15 - 7?", options: ["8", "9", "7", "6"], a: "8" },
-          { q: "Which is an EVEN number?", options: ["8", "7", "5", "3"], a: "8" },
-          { q: "What is 10 + 10?", options: ["20", "100", "15", "18"], a: "20" },
-          { q: "Find the missing number: 5, 10, 15, __?", options: ["20", "25", "16", "18"], a: "20" },
-          { q: "A clock has two hands. The short hand tells the...?", options: ["Hour", "Minute", "Second", "Day"], a: "Hour" }
-        ]
+    // Complete Question Bank for Classes 1, 2, and 3
+    const quizDatabase = {
+      class1: {
+        math: {
+          easy: [
+            { q: "What is 2 + 3?", options: ["5", "4", "6", "7"], a: "5" },
+            { q: "What number comes after 9?", options: ["10", "8", "11", "7"], a: "10" },
+            { q: "Which shape has 3 sides?", options: ["Triangle", "Square", "Circle", "Rectangle"], a: "Triangle" },
+            { q: "What is 5 - 1?", options: ["4", "3", "6", "2"], a: "4" },
+            { q: "Which number is smaller?", options: ["2", "8", "12", "9"], a: "2" },
+            { q: "How many fingers are on one hand?", options: ["5", "4", "10", "6"], a: "5" },
+            { q: "What is 1 + 1?", options: ["2", "3", "0", "1"], a: "2" }
+          ],
+          medium: [
+            { q: "What is 7 + 6?", options: ["13", "12", "14", "11"], a: "13" },
+            { q: "What is 10 - 4?", options: ["6", "5", "7", "4"], a: "6" },
+            { q: "Which number is the BIGGEST?", options: ["19", "12", "9", "15"], a: "19" },
+            { q: "Count by 2s: 2, 4, 6, __?", options: ["8", "7", "9", "10"], a: "8" },
+            { q: "What number comes just before 20?", options: ["19", "18", "21", "17"], a: "19" },
+            { q: "How many corners does a square have?", options: ["4", "3", "5", "0"], a: "4" }
+          ],
+          hard: [
+            { q: "You have 5 apples and buy 4 more. How many in total?", options: ["9", "8", "10", "7"], a: "9" },
+            { q: "What is 15 - 7?", options: ["8", "9", "7", "6"], a: "8" },
+            { q: "Which number is an EVEN number?", options: ["8", "7", "5", "3"], a: "8" },
+            { q: "What is 10 + 10?", options: ["20", "100", "15", "18"], a: "20" },
+            { q: "Complete the pattern: 5, 10, 15, __?", options: ["20", "25", "16", "30"], a: "20" }
+          ]
+        },
+        english: {
+          easy: [
+            { q: "Which letter comes after 'C'?", options: ["D", "E", "B", "A"], a: "D" },
+            { q: "What is the first letter of 'APPLE'?", options: ["A", "P", "L", "E"], a: "A" },
+            { q: "Which of these is a vowel?", options: ["E", "B", "T", "M"], a: "E" },
+            { q: "Which word rhymes with 'CAT'?", options: ["BAT", "DOG", "SUN", "PIG"], a: "BAT" },
+            { q: "Plural of 'Dog' (more than one):", options: ["Dogs", "Doges", "Dogies", "Dog"], a: "Dogs" }
+          ],
+          medium: [
+            { q: "What is the opposite of 'HOT'?", options: ["Cold", "Warm", "Dry", "Soft"], a: "Cold" },
+            { q: "Choose the correct spelling:", options: ["Book", "Buke", "Bok", "Boock"], a: "Book" },
+            { q: "Which word is a naming word (Noun)?", options: ["Ball", "Run", "Quickly", "Yellow"], a: "Ball" },
+            { q: "Fill the blank: B _ D (place where you sleep)", options: ["E", "A", "O", "U"], a: "E" },
+            { q: "What is the opposite of 'BIG'?", options: ["Small", "Huge", "Tall", "Heavy"], a: "Small" }
+          ],
+          hard: [
+            { q: "Choose the correct sentence:", options: ["She has a red ball.", "She have a red ball.", "She having ball.", "Her ball red."], a: "She has a red ball." },
+            { q: "What is the plural of 'BOX'?", options: ["Boxes", "Boxs", "Boxen", "Boxies"], a: "Boxes" },
+            { q: "Which word starts with the blend 'BL'?", options: ["Blue", "Boat", "Bird", "Bear"], a: "Blue" },
+            { q: "Which word is an action word (Verb)?", options: ["Jump", "Tree", "Pencil", "Desk"], a: "Jump" }
+          ]
+        },
+        science: {
+          easy: [
+            { q: "Which body part do you use to SEE?", options: ["Eyes", "Ears", "Nose", "Hands"], a: "Eyes" },
+            { q: "What does a green plant need to grow?", options: ["Water & Sunlight", "Juice", "Candy", "Milk"], a: "Water & Sunlight" },
+            { q: "Which animal gives us milk?", options: ["Cow", "Lion", "Tiger", "Eagle"], a: "Cow" },
+            { q: "Where do fish live?", options: ["In water", "On trees", "In air", "In caves"], a: "In water" },
+            { q: "How many legs does a dog have?", options: ["4", "2", "6", "8"], a: "4" }
+          ],
+          medium: [
+            { q: "Which sense organ helps us TASTE food?", options: ["Tongue", "Nose", "Skin", "Eyes"], a: "Tongue" },
+            { q: "Which animal is the 'King of the Jungle'?", options: ["Lion", "Elephant", "Monkey", "Fox"], a: "Lion" },
+            { q: "Which part of a plant is underground?", options: ["Roots", "Leaves", "Flowers", "Stem"], a: "Roots" },
+            { q: "Which bird cannot fly high and swims in cold water?", options: ["Penguin", "Parrot", "Crow", "Eagle"], a: "Penguin" }
+          ],
+          hard: [
+            { q: "Which of these animals lays eggs?", options: ["Hen", "Cow", "Dog", "Cat"], a: "Hen" },
+            { q: "What makes day and night on Earth?", options: ["Earth spinning around itself", "Sun goes to sleep", "Moon shines bright", "Wind blowing"], a: "Earth spinning around itself" },
+            { q: "Which is a living thing?", options: ["Tree", "Toy car", "Rock", "Pencil"], a: "Tree" },
+            { q: "Which meal do we eat in the morning?", options: ["Breakfast", "Lunch", "Dinner", "Snack"], a: "Breakfast" }
+          ]
+        }
       },
 
-      english: {
-        easy: [
-          { q: "Which letter comes after 'C'?", options: ["D", "E", "B", "A"], a: "D" },
-          { q: "What is the first letter of 'APPLE'?", options: ["A", "P", "L", "E"], a: "A" },
-          { q: "Which of these is a VOWEL?", options: ["E", "B", "T", "M"], a: "E" },
-          { q: "Which word rhymes with 'CAT'?", options: ["BAT", "DOG", "SUN", "PIG"], a: "BAT" },
-          { q: "What is the plural of 'Cat' (more than one)?", options: ["Cats", "Cates", "Caties", "Cat"], a: "Cats" },
-          { q: "Which letter is a CAPITAL letter?", options: ["M", "m", "b", "d"], a: "M" }
-        ],
-        medium: [
-          { q: "What is the opposite of 'HOT'?", options: ["Cold", "Warm", "Dry", "Soft"], a: "Cold" },
-          { q: "Choose the correct word: 'The sky is ___'", options: ["blue", "blew", "blow", "blues"], a: "blue" },
-          { q: "Which word is a naming word (Noun)?", options: ["Dog", "Run", "Quickly", "Yellow"], a: "Dog" },
-          { q: "Fill in the vowel: B _ D (place to sleep)", options: ["E", "A", "O", "U"], a: "E" },
-          { q: "What is the opposite of 'BIG'?", options: ["Small", "Huge", "Tall", "Heavy"], a: "Small" },
-          { q: "Which of these is an action word (Verb)?", options: ["Jump", "Chair", "Table", "Tree"], a: "Jump" }
-        ],
-        hard: [
-          { q: "Choose the correct sentence:", options: ["She has a red ball.", "She have a red ball.", "She having a ball.", "Her has red ball."], a: "She has a red ball." },
-          { q: "What is the plural of 'BOX'?", options: ["Boxes", "Boxs", "Boxen", "Boxies"], a: "Boxes" },
-          { q: "Which word starts with a blend sound 'BL'?", options: ["Blue", "Ball", "Bird", "Boat"], a: "Blue" },
-          { q: "Which word describes something (Adjective)?", options: ["Sweet", "Sugar", "Eat", "Plate"], a: "Sweet" },
-          { q: "What punctuation mark goes at the end of 'Where are you going'?", options: ["?", "!", ".", ","], a: "?" }
-        ]
+      class2: {
+        math: {
+          easy: [
+            { q: "What is 25 + 10?", options: ["35", "30", "40", "25"], a: "35" },
+            { q: "What is 4 × 2?", options: ["8", "6", "10", "4"], a: "8" },
+            { q: "What is 50 - 20?", options: ["30", "20", "40", "10"], a: "30" },
+            { q: "Which shape has no straight edges?", options: ["Circle", "Square", "Rectangle", "Hexagon"], a: "Circle" },
+            { q: "How many minutes are in 1 hour?", options: ["60", "30", "100", "24"], a: "60" }
+          ],
+          medium: [
+            { q: "What is 7 × 3?", options: ["21", "24", "18", "28"], a: "21" },
+            { q: "Find the place value of 5 in 152:", options: ["Tens (50)", "Ones (5)", "Hundreds (500)", "Thousands"], a: "Tens (50)" },
+            { q: "What is 84 - 28?", options: ["56", "64", "58", "66"], a: "56" },
+            { q: "How many days are in a week?", options: ["7", "5", "6", "10"], a: "7" },
+            { q: "What is 45 + 38?", options: ["83", "73", "85", "78"], a: "83" }
+          ],
+          hard: [
+            { q: "A notebook costs $5. How much do 6 notebooks cost?", options: ["$30", "$25", "$35", "$20"], a: "$30" },
+            { q: "Divide: 18 ÷ 2 = ?", options: ["9", "8", "7", "6"], a: "9" },
+            { q: "Which fraction represents half of an apple?", options: ["1/2", "1/4", "2/3", "1/1"], a: "1/2" },
+            { q: "What is 100 minus 37?", options: ["63", "73", "67", "53"], a: "63" },
+            { q: "A rectangle has sides 4 cm and 2 cm. What is its perimeter?", options: ["12 cm", "8 cm", "6 cm", "16 cm"], a: "12 cm" }
+          ]
+        },
+        english: {
+          easy: [
+            { q: "What is the past tense of 'play'?", options: ["Played", "Plays", "Playing", "Plaied"], a: "Played" },
+            { q: "Which word is an adjective (describing word)?", options: ["Beautiful", "Run", "Boy", "Quickly"], a: "Beautiful" },
+            { q: "Opposite of 'HAPPY':", options: ["Sad", "Glad", "Smile", "Angry"], a: "Sad" },
+            { q: "Choose the correct article: '___ umbrella'", options: ["An", "A", "The", "No article"], a: "An" }
+          ],
+          medium: [
+            { q: "Which word is a pronoun?", options: ["He", "Table", "Sing", "Loud"], a: "He" },
+            { q: "Identify the proper noun:", options: ["London", "City", "Country", "Town"], a: "London" },
+            { q: "Choose the plural of 'Child':", options: ["Children", "Childs", "Childes", "Childrens"], a: "Children" },
+            { q: "Which sentence uses the correct punctuation?", options: ["Where are you going?", "Where are you going.", "Where are you going!", "Where are you going,"], a: "Where are you going?" }
+          ],
+          hard: [
+            { q: "Find the adverb in: 'He ran quickly.'", options: ["Quickly", "Ran", "He", "None"], a: "Quickly" },
+            { q: "What is the opposite of 'GENEROUS'?", options: ["Selfish", "Kind", "Helpful", "Happy"], a: "Selfish" },
+            { q: "Choose the correct homophone: 'I can ___ the birds singing.'", options: ["hear", "here", "hare", "heir"], a: "hear" },
+            { q: "Identify the compound word:", options: ["Sunlight", "Sunny", "Lighter", "Sun"], a: "Sunlight" }
+          ]
+        },
+        science: {
+          easy: [
+            { q: "Which gas do humans inhale to stay alive?", options: ["Oxygen", "Carbon Dioxide", "Helium", "Nitrogen"], a: "Oxygen" },
+            { q: "Which sense organ helps us hear sounds?", options: ["Ears", "Eyes", "Nose", "Skin"], a: "Ears" },
+            { q: "Water freezes into which solid form?", options: ["Ice", "Steam", "Smoke", "Clay"], a: "Ice" },
+            { q: "Which planet do we live on?", options: ["Earth", "Mars", "Jupiter", "Venus"], a: "Earth" }
+          ],
+          medium: [
+            { q: "Animals that eat ONLY plants are called:", options: ["Herbivores", "Carnivores", "Omnivores", "Insectivores"], a: "Herbivores" },
+            { q: "Which part of the plant prepares food using sunlight?", options: ["Leaves", "Roots", "Stem", "Flowers"], a: "Leaves" },
+            { q: "Which of these is a source of natural light?", options: ["Sun", "Light bulb", "Flashlight", "Candle"], a: "Sun" },
+            { q: "How many bones does a human adult have?", options: ["206", "106", "300", "250"], a: "206" }
+          ],
+          hard: [
+            { q: "What is the process of water turning into vapor called?", options: ["Evaporation", "Condensation", "Freezing", "Melting"], a: "Evaporation" },
+            { q: "Caterpillars transform into which beautiful creature?", options: ["Butterfly", "Beetle", "Dragonfly", "Grasshopper"], a: "Butterfly" },
+            { q: "Which organ pumps blood throughout the human body?", options: ["Heart", "Lungs", "Brain", "Stomach"], a: "Heart" },
+            { q: "Which state of matter is steam?", options: ["Gas", "Liquid", "Solid", "Plasma"], a: "Gas" }
+          ]
+        }
       },
 
-      science: {
-        easy: [
-          { q: "Which part of your body do you use to SEE?", options: ["Eyes", "Ears", "Nose", "Hands"], a: "Eyes" },
-          { q: "What does a plant need to grow?", options: ["Water & Sunlight", "Juice & Milk", "Candy", "Ice cream"], a: "Water & Sunlight" },
-          { q: "Which animal gives us milk?", options: ["Cow", "Lion", "Tiger", "Eagle"], a: "Cow" },
-          { q: "The Sun gives us light and...?", options: ["Heat", "Ice", "Water", "Wind"], a: "Heat" },
-          { q: "Where do fish live?", options: ["In water", "On trees", "In air", "In underground caves"], a: "In water" },
-          { q: "How many legs does a dog have?", options: ["4", "2", "6", "8"], a: "4" }
-        ],
-        medium: [
-          { q: "Which sense organ helps us TASTE food?", options: ["Tongue", "Nose", "Skin", "Eyes"], a: "Tongue" },
-          { q: "Which animal is known as the 'King of the Jungle'?", options: ["Lion", "Elephant", "Monkey", "Fox"], a: "Lion" },
-          { q: "Which part of a plant is under the ground?", options: ["Roots", "Leaves", "Flowers", "Stem"], a: "Roots" },
-          { q: "Which is a domestic (pet) animal?", options: ["Cat", "Bear", "Zebra", "Wolf"], a: "Cat" },
-          { q: "Which bird cannot fly high and swims well?", options: ["Penguin", "Parrot", "Crow", "Sparrow"], a: "Penguin" },
-          { q: "What color are most plant leaves?", options: ["Green", "Blue", "Pink", "Black"], a: "Green" }
-        ],
-        hard: [
-          { q: "Which animal lays eggs?", options: ["Hen", "Cow", "Dog", "Cat"], a: "Hen" },
-          { q: "What makes day and night on Earth?", options: ["Earth spinning (rotating)", "The Moon sleeping", "Clouds moving", "Wind blowing"], a: "Earth spinning (rotating)" },
-          { q: "Which of these is a living thing?", options: ["Tree", "Toy car", "Rock", "Pencil"], a: "Tree" },
-          { q: "Frogs can live both on land and in...?", options: ["Water", "Space", "Trees only", "Fire"], a: "Water" },
-          { q: "Which meal do we eat in the morning?", options: ["Breakfast", "Lunch", "Dinner", "Snack"], a: "Breakfast" }
-        ]
+      class3: {
+        math: {
+          easy: [
+            { q: "What is 150 + 250?", options: ["400", "350", "450", "300"], a: "400" },
+            { q: "What is 9 × 8?", options: ["72", "64", "81", "70"], a: "72" },
+            { q: "How many hours are in 2 days?", options: ["48", "24", "72", "36"], a: "48" },
+            { q: "What is the Roman numeral for 10?", options: ["X", "V", "L", "C"], a: "X" }
+          ],
+          medium: [
+            { q: "What is 144 ÷ 12?", options: ["12", "11", "13", "14"], a: "12" },
+            { q: "What is 350 - 175?", options: ["175", "185", "165", "195"], a: "175" },
+            { q: "What is the perimeter of an equilateral triangle with side 6 cm?", options: ["18 cm", "12 cm", "24 cm", "16 cm"], a: "18 cm" },
+            { q: "Which fraction is equivalent to 1/2?", options: ["2/4", "3/5", "1/3", "2/6"], a: "2/4" },
+            { q: "How many grams make 1 kilogram?", options: ["1000 g", "100 g", "500 g", "10 g"], a: "1000 g" }
+          ],
+          hard: [
+            { q: "What is 25 × 12?", options: ["300", "280", "320", "250"], a: "300" },
+            { q: "A train leaves at 3:15 PM and arrives at 5:45 PM. How long was the trip?", options: ["2 hrs 30 mins", "2 hrs 15 mins", "3 hrs", "1 hr 45 mins"], a: "2 hrs 30 mins" },
+            { q: "What is 625 ÷ 5?", options: ["125", "115", "135", "105"], a: "125" },
+            { q: "Area of a square with side 7 cm is:", options: ["49 sq cm", "28 sq cm", "35 sq cm", "42 sq cm"], a: "49 sq cm" },
+            { q: "Solve: (15 + 5) × 3 - 10 = ?", options: ["50", "60", "40", "45"], a: "50" }
+          ]
+        },
+        english: {
+          easy: [
+            { q: "Find the synonym of 'ANGRY':", options: ["Mad", "Happy", "Calm", "Peaceful"], a: "Mad" },
+            { q: "What is the past tense of 'write'?", options: ["Wrote", "Written", "Writes", "Writed"], a: "Wrote" },
+            { q: "Identify the conjunction: 'I like tea and coffee.'", options: ["and", "tea", "like", "coffee"], a: "and" }
+          ],
+          medium: [
+            { q: "Which word is an adverb?", options: ["Silently", "Silent", "Silence", "Silencer"], a: "Silently" },
+            { q: "What is the antonym of 'ANCIENT'?", options: ["Modern", "Old", "Historic", "Aged"], a: "Modern" },
+            { q: "Choose the correct collective noun: A ___ of wolves.", options: ["Pack", "Flock", "Herd", "Swarm"], a: "Pack" },
+            { q: "Which sentence is in present continuous tense?", options: ["She is singing.", "She sang.", "She sings.", "She will sing."], a: "She is singing." }
+          ],
+          hard: [
+            { q: "Identify the prefix in 'Unhappy':", options: ["Un", "Happy", "Appy", "H"], a: "Un" },
+            { q: "Choose the sentence with correct subject-verb agreement:", options: ["The dogs bark loudly.", "The dogs barks loudly.", "The dog bark loudly.", "Dogs is barking."], a: "The dogs bark loudly." },
+            { q: "Which phrase is an idiom meaning very rare?", options: ["Once in a blue moon", "Piece of cake", "Cold feet", "Spill the beans"], a: "Once in a blue moon" },
+            { q: "Which word has a silent letter 'K'?", options: ["Knight", "Kite", "King", "Kangaroo"], a: "Knight" }
+          ]
+        },
+        science: {
+          easy: [
+            { q: "Which planet is known as the 'Red Planet'?", options: ["Mars", "Jupiter", "Venus", "Saturn"], a: "Mars" },
+            { q: "Animals that eat both plants and meat are called:", options: ["Omnivores", "Carnivores", "Herbivores", "Parasites"], a: "Omnivores" },
+            { q: "Which force pulls objects down toward Earth?", options: ["Gravity", "Magnetism", "Friction", "Pressure"], a: "Gravity" }
+          ],
+          medium: [
+            { q: "Which gas do plants absorb during photosynthesis?", options: ["Carbon Dioxide", "Oxygen", "Nitrogen", "Hydrogen"], a: "Carbon Dioxide" },
+            { q: "What is the boiling point of pure water?", options: ["100°C", "50°C", "0°C", "212°C"], a: "100°C" },
+            { q: "Which mineral makes our bones and teeth strong?", options: ["Calcium", "Iron", "Sodium", "Potassium"], a: "Calcium" },
+            { q: "The process by which plants make food is called:", options: ["Photosynthesis", "Germination", "Digestion", "Respiration"], a: "Photosynthesis" }
+          ],
+          hard: [
+            { q: "Which layer of the atmosphere protects us from harmful UV rays?", options: ["Ozone layer", "Troposphere", "Ionosphere", "Mesosphere"], a: "Ozone layer" },
+            { q: "What type of simple machine is a seesaw?", options: ["Lever", "Pulley", "Inclined plane", "Screw"], a: "Lever" },
+            { q: "Which blood cells help fight infections and diseases?", options: ["White Blood Cells", "Red Blood Cells", "Platelets", "Plasma"], a: "White Blood Cells" },
+            { q: "How long does the Earth take to revolve around the Sun?", options: ["365 1/4 days", "24 hours", "30 days", "12 months and 10 days"], a: "365 1/4 days" }
+          ]
+        }
       }
     };
 
-    // State Variables
+    // State
+    let selectedClass = 'class1';
     let selectedSubject = 'math';
     let selectedLevel = 'easy';
     let activeQuestions = [];
     let currentIndex = 0;
     let currentScore = 0;
-    const TOTAL_QUESTIONS_PER_ROUND = 5;
+    const QUESTIONS_PER_ROUND = 5;
 
-    // Helper: Shuffle Array (Fisher-Yates)
+    // Helper: Fisher-Yates Array Shuffle
     function shuffle(arr) {
       const copy = [...arr];
       for (let i = copy.length - 1; i > 0; i--) {
@@ -405,6 +574,13 @@
       return copy;
     }
 
+    function setClassLevel(cls) {
+      selectedClass = cls;
+      document.querySelectorAll('#class-group .pill-btn').forEach(btn => {
+        btn.classList.toggle('selected', btn.dataset.class === cls);
+      });
+    }
+
     function setSubject(sub) {
       selectedSubject = sub;
       document.querySelectorAll('#subject-group .pill-btn').forEach(btn => {
@@ -412,7 +588,7 @@
       });
     }
 
-    function setLevel(lvl) {
+    function setDifficulty(lvl) {
       selectedLevel = lvl;
       document.querySelectorAll('#difficulty-group .pill-btn').forEach(btn => {
         btn.classList.toggle('selected', btn.dataset.level === lvl);
@@ -423,24 +599,24 @@
       currentScore = 0;
       currentIndex = 0;
 
-      // Select and shuffle questions
-      const pool = questionsDatabase[selectedSubject][selectedLevel];
-      const randomSubset = shuffle(pool).slice(0, Math.min(TOTAL_QUESTIONS_PER_ROUND, pool.length));
+      // Extract question bank for the selected Class, Subject, and Level
+      const pool = quizDatabase[selectedClass][selectedSubject][selectedLevel];
+      const randomSubset = shuffle(pool).slice(0, Math.min(QUESTIONS_PER_ROUND, pool.length));
 
-      // Shuffle options for each question
       activeQuestions = randomSubset.map(item => ({
         question: item.q,
         options: shuffle(item.options),
         correctAnswer: item.a
       }));
 
-      // Switch screens
+      // Switch views
       document.getElementById('setup-screen').classList.add('hidden');
       document.getElementById('result-screen').classList.add('hidden');
       document.getElementById('quiz-screen').classList.remove('hidden');
 
-      const subjectBadge = document.getElementById('subject-badge');
-      subjectBadge.textContent = `${selectedSubject.toUpperCase()} (${selectedLevel.toUpperCase()})`;
+      const classNames = { class1: "Class 1", class2: "Class 2", class3: "Class 3" };
+      document.getElementById('badge-info').textContent = `${classNames[selectedClass]} • ${selectedSubject.toUpperCase()} • ${selectedLevel.toUpperCase()}`;
+      document.getElementById('nav-info').textContent = `${classNames[selectedClass]} Active`;
 
       showQuestion();
     }
@@ -484,10 +660,10 @@
 
       if (isCorrect) {
         currentScore++;
-        feedback.textContent = "🌟 Wonderful! You got it right!";
+        feedback.textContent = "🌟 Fantastic! Correct answer!";
         feedback.className = "feedback correct";
       } else {
-        feedback.textContent = `Oops! The correct answer is "${q.correctAnswer}".`;
+        feedback.textContent = `Oops! The right answer is: "${q.correctAnswer}".`;
         feedback.className = "feedback incorrect";
       }
 
@@ -495,7 +671,7 @@
       document.getElementById('score-counter').textContent = `Score: ${currentScore} ⭐`;
 
       const nextBtn = document.getElementById('next-btn');
-      nextBtn.textContent = (currentIndex + 1 < activeQuestions.length) ? "Next Question ➡️" : "Show My Score 🏆";
+      nextBtn.textContent = (currentIndex + 1 < activeQuestions.length) ? "Next Question ➡️" : "Show Final Results 🏆";
       nextBtn.classList.remove('hidden');
     }
 
@@ -516,17 +692,19 @@
       
       const starMsg = document.getElementById('star-message');
       if (currentScore === activeQuestions.length) {
-        starMsg.textContent = "⭐⭐⭐ Super Star! Perfect Score!";
+        starMsg.textContent = "⭐⭐⭐ Amazing! Perfect Score!";
       } else if (currentScore >= 3) {
-        starMsg.textContent = "⭐⭐ Great Effort! Almost there!";
+        starMsg.textContent = "⭐⭐ Great Job! Well done!";
       } else {
-        starMsg.textContent = "⭐ Nice Try! Practice makes perfect!";
+        starMsg.textContent = "⭐ Nice Attempt! Keep learning!";
       }
     }
 
     function goHome() {
+      document.getElementById('quiz-screen').classList.add('hidden');
       document.getElementById('result-screen').classList.add('hidden');
       document.getElementById('setup-screen').classList.remove('hidden');
+      document.getElementById('nav-info').textContent = "Fun Learning Quiz";
     }
   </script>
 </body>
